@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { X, Menu, UserCircle2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import coImage from "../assets/co.png"
+import coImage from "../assets/co.png";
+import { toast } from "react-toastify";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,19 +33,20 @@ const Navbar = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     setUser(null);
+    toast.success("Logout successful!");
     navigate("/login");
   };
+  
 
   return (
     <nav className="bg-black text-white">
       <div className="flex justify-between items-center px-6 py-4">
         <Link to="/" className="flex items-center space-x-2">
-        <img
-  src={coImage}
-  alt="Logo"
-  className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain"
-/>
-
+          <img
+            src={coImage}
+            alt="Logo"
+            className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain"
+          />
         </Link>
 
         <div className="hidden md:flex space-x-6 text-lg items-center">
