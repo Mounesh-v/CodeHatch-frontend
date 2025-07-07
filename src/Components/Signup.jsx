@@ -28,7 +28,7 @@ const Signup = () => {
     }
 
     try {
-      await axios.post("http://localhost:3000/api/auth/register", {
+      await axios.post("https://codehatch-backend-6.onrender.com/api/auth/register", {
         name: formData.name,
         email: formData.email,
         password: formData.password,

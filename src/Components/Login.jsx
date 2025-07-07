@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/login", {
+      const res = await axios.post("https://codehatch-backend-6.onrender.com/api/auth/login", {
         email: formData.email,
         password: formData.password,
       });
