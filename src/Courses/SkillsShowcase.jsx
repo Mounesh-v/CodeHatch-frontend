@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import Particles from "react-tsparticles";
+import Particles from "react-tsparticles"; 
 import { loadFull } from "tsparticles";
 
 gsap.registerPlugin(ScrollTrigger);
