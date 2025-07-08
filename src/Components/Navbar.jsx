@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { X, Menu, UserCircle2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import coImage from "../assets/co.png";
 import { toast } from "react-toastify";
-
+import coImage from "../assets/co.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +35,6 @@ const Navbar = () => {
     toast.success("Logout successful!");
     navigate("/login");
   };
-  
 
   return (
     <nav className="bg-black text-white">
@@ -50,24 +48,14 @@ const Navbar = () => {
         </Link>
 
         <div className="hidden md:flex space-x-6 text-lg items-center">
-          <Link to="/Courses" className="hover:text-yellow-300">
-            Courses
-          </Link>
-          <Link to="/Plans" className="hover:text-yellow-300">
-            Plans
-          </Link>
-          <Link to="/contact" className="hover:text-yellow-300">
-            Contact Us
-          </Link>
+          <Link to="/Courses" className="hover:text-yellow-300">Courses</Link>
+          <Link to="/Plans" className="hover:text-yellow-300">Plans</Link>
+          <Link to="/contact" className="hover:text-yellow-300">Contact Us</Link>
 
           {!user ? (
             <>
-              <Link to="/signup" className="hover:text-yellow-300">
-                Sign Up
-              </Link>
-              <Link to="/login" className="hover:text-yellow-300">
-                Login
-              </Link>
+              <Link to="/signup" className="hover:text-yellow-300">Sign Up</Link>
+              <Link to="/login" className="hover:text-yellow-300">Login</Link>
             </>
           ) : (
             <div className="relative" ref={dropdownRef}>
@@ -99,14 +87,12 @@ const Navbar = () => {
           )}
         </div>
 
-        <div
-          className="md:hidden cursor-pointer"
-          onClick={() => setIsOpen(true)}
-        >
+        <div className="md:hidden cursor-pointer" onClick={() => setIsOpen(true)}>
           <Menu className="w-6 h-6 text-white" />
         </div>
       </div>
 
+      {/* Mobile Sidebar */}
       <div
         className={`fixed top-0 right-0 h-full w-64 bg-[#0b0b1f] text-white shadow-lg transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
@@ -114,76 +100,31 @@ const Navbar = () => {
       >
         <div className="flex justify-between p-4">
           <span className="text-xl font-bold">Menu</span>
-          <X
-            className="w-6 h-6 cursor-pointer"
-            onClick={() => setIsOpen(false)}
-          />
+          <X className="w-6 h-6 cursor-pointer" onClick={() => setIsOpen(false)} />
         </div>
         <ul className="flex flex-col space-y-6 text-lg px-6 mt-4">
-          <Link
-            to="/Courses"
-            onClick={() => setIsOpen(false)}
-            className="hover:text-yellow-300"
-          >
-            Courses
-          </Link>
-          <Link
-            to="/Plans"
-            onClick={() => setIsOpen(false)}
-            className="hover:text-yellow-300"
-          >
-            Plans
-          </Link>
-          <Link
-            to="/contact"
-            onClick={() => setIsOpen(false)}
-            className="hover:text-yellow-300"
-          >
-            Contact Us
-          </Link>
+          <Link to="/Courses" onClick={() => setIsOpen(false)} className="hover:text-yellow-300">Courses</Link>
+          <Link to="/Plans" onClick={() => setIsOpen(false)} className="hover:text-yellow-300">Plans</Link>
+          <Link to="/contact" onClick={() => setIsOpen(false)} className="hover:text-yellow-300">Contact Us</Link>
 
           {!user ? (
             <>
-              <Link
-                to="/signup"
-                onClick={() => setIsOpen(false)}
-                className="hover:text-yellow-300"
-              >
-                Sign Up
-              </Link>
-              <Link
-                to="/login"
-                onClick={() => setIsOpen(false)}
-                className="hover:text-yellow-300"
-              >
-                Login
-              </Link>
+              <Link to="/signup" onClick={() => setIsOpen(false)} className="hover:text-yellow-300">Sign Up</Link>
+              <Link to="/login" onClick={() => setIsOpen(false)} className="hover:text-yellow-300">Login</Link>
             </>
           ) : (
-            <div className="relative">
+            <div className="flex flex-col space-y-1">
+              <span className="text-yellow-300">{user.name}</span>
               <button
-                onClick={() => setShowDropdown(!showDropdown)}
-                className="w-full text-left px-4 py-2 text-yellow-300 flex items-center justify-between"
+                type="button"
+                onClick={() => {
+                  handleLogout();
+                  setIsOpen(false);
+                }}
+                className="text-left px-4 py-2 text-red-600 hover:bg-red-100 rounded"
               >
-                {user.name}
-                <span className="text-white text-sm ml-2">▼</span>
+                Logout
               </button>
-
-              {showDropdown && (
-                <div className="mt-2 w-full bg-blue-950 text-white rounded shadow z-50">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      handleLogout();
-                      setIsOpen(false);
-                      setShowDropdown(false);
-                    }}
-                    className="w-full text-left px-4 py-2 hover:bg-red-100 text-red-600"
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
             </div>
           )}
         </ul>
